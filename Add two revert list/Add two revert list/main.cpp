@@ -95,9 +95,24 @@ public:
         }else{
             // same methology, but instead adding from same starting position, adding from shortter list start position for both list and prepend preserved digit from longer list
             if(length1>length2){
+                // how many digits need to preserve from list1
                 int preserveDigitCount = length1 - length2;
+                // appending non adding digit from list 1
+                for (int i = 0; i<preserveDigitCount; i++) {
+                    currentRoot->next = new ListNode(temp1->val);
+                    currentRoot = currentRoot->next;
+                    temp1=temp1->next;
+                }
+                // adding both list from least(left most) same digit
+                currentRoot->next =Solution().addTwoNumbers(temp1, temp2);
             }else{
-                
+                int preserveDigitCount = length2 - length1;
+                for (int i = 0; i<preserveDigitCount; i++) {
+                    currentRoot->next = new ListNode(temp2->val);
+                    currentRoot = currentRoot->next;
+                    temp2=temp2->next;
+                }
+                currentRoot->next =Solution().addTwoNumbers(temp1, temp2);
             }
         }
         
@@ -108,17 +123,18 @@ public:
 int main(){
     
     // test
-    // [3->6->5]
+    // [3->6->5->1]
     ListNode* l1 = new ListNode(3);
     l1->next = new ListNode(6);
     l1->next->next = new ListNode(5);
+    l1->next->next->next = new ListNode(1);
     
     // [5->9->8]
     ListNode* l2 = new ListNode(5);
     l2->next = new ListNode(9);
     l2->next->next = new ListNode(8);
     
-    // expect [8->5->4->1]
+    // expect [3->1->5->0->1]
     std::cout << '[';
     ListNode*r = Solution().addTwoNumbers(l1, l2);
     ListNode* tempRoot = r;
