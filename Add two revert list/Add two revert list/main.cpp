@@ -56,7 +56,7 @@ public:
         // - list has different length
         ////////////////////////////////////////////////////////
         
-        // same length, add from left to right, with carry digit(bool) default false
+        // same length, add from left to right from same postion for each list, with carry digit(bool) default false
         temp1 = l1;
         temp2 = l2;
         // psudo fake root, actual root is r->next
@@ -88,6 +88,10 @@ public:
                 temp1 = temp1->next;
                 temp2 = temp2->next;
             }
+            // end sum but if last add has carry out
+            if (carry) {
+                currentRoot ->next = new ListNode(1);
+            }
         }else{
             // same methology, but instead adding from same starting position, adding from abs(length1-length2) position from the longer list
             if(length1>length2){
@@ -103,17 +107,18 @@ public:
 
 int main(){
     
-    // [3->6->2]
+    // test
+    // [3->6->5]
     ListNode* l1 = new ListNode(3);
     l1->next = new ListNode(6);
-    l1->next->next = new ListNode(2);
+    l1->next->next = new ListNode(5);
     
-    // [5->4->1]
+    // [5->9->8]
     ListNode* l2 = new ListNode(5);
-    l2->next = new ListNode(4);
-    l2->next->next = new ListNode(1);
+    l2->next = new ListNode(9);
+    l2->next->next = new ListNode(8);
     
-    // expect [8->0->4]
+    // expect [8->5->4->1]
     std::cout << '[';
     ListNode*r = Solution().addTwoNumbers(l1, l2);
     ListNode* tempRoot = r;
