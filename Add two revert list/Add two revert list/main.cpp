@@ -95,7 +95,7 @@ public:
         }else{
             // same methology, but instead adding from same starting position, adding from shortter list start position for both list and prepend preserved digit from longer list
             if(length1>length2){
-                
+                int preserveDigitCount = length1 - length2;
             }else{
                 
             }
