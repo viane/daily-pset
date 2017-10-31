@@ -93,7 +93,7 @@ public:
                 currentRoot ->next = new ListNode(1);
             }
         }else{
-            // same methology, but instead adding from same starting position, adding from abs(length1-length2) position from the longer list
+            // same methology, but instead adding from same starting position, adding from shortter list start position for both list and prepend preserved digit from longer list
             if(length1>length2){
                 
             }else{
