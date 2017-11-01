@@ -12,3 +12,9 @@
 *.xcscheme
 
 *.plist
+
+*/project
+
+*/target
+
+*/.idea
