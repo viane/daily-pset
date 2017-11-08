@@ -6,6 +6,8 @@ Created on Wed Nov  8 01:06:13 2017
 @author: allen
 """
 
+import sys
+
 class Solution:
     maxLssLength = 0
     maxLss = ""
@@ -49,6 +51,7 @@ class Solution:
                                 self.maxLssLength = len(potentialLSS)
                         else:
                             print("Not same char")
+                            break
                         print("Current potential max palindrome string is ", potentialLSS, '\n')
             else:
                 print("Char closes to start")
@@ -67,9 +70,22 @@ class Solution:
                                 self.maxLssLength = len(potentialLSS)
                         else:
                             print("Not same char")
+                            break
                         print("Current potential max palindrome string is ", potentialLSS, '\n')
             print("-----------------------------------------------------------------")
-        return self.maxLss
+        
+        if self.maxLssLength == 0:
+            return "No Palindrome Substring"
+        else:
+            return self.maxLss
+    
+def main():
+    testStr=""
+    if len(sys.argv) > 1:
+        testStr = sys.argv[1]
+    else:
+        testStr= "aababac"
+    print("\nCheck longest palindrome string of \"", testStr , "\" : ", Solution().longestPalindrome(testStr))    
     
 if __name__ == "__main__":
-    print("\nThe longest palindrome string: ", Solution().longestPalindrome("baabaaasaijoqijjoeqasidlasdjlskjalkalkcpfodczxcjnkkqwkesadd"))
+    main()
