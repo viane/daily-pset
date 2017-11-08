@@ -1,0 +1,109 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Nov  8 11:10:06 2017
+
+@author: allen
+"""
+
+# ZigZag Conversion
+
+import math
+import sys
+
+class Solution:
+    def convert(self, s, numRows):
+        """
+        :type s: str
+        :type numRows: int
+        :rtype: str
+        """
+        #generate matrix by number of rows
+        """
+        max needed matrix (numRows == 4):
+            -   -           -
+            - - - -   ...   - -
+            --  --          --
+            -   -           -
+            
+        """
+        if numRows < 3:
+            raise ValueError('Number of row must greater than 3')
+
+        templateBlockSize = numRows + (numRows-2)
+        
+        blocksNeed = math.ceil(len(s)/templateBlockSize)
+        
+        matrixH, matrixW = numRows, (1+(numRows-2))*blocksNeed
+        
+        Matrix = [[" " for x in range(matrixW)] for y in range(matrixH)] 
+        
+        # place mark
+        direction = "down"
+        alterDirection = False
+        currentX,currentY = 0,0;
+        Matrix[currentY][currentX]="˙"
+            # start at 0,0 then 1,0 ...
+        for i in range(1,len(s)+1):
+            #print("At (",currentY,currentX,")" )
+            Matrix[currentY][currentX] = "˙"
+            # update if need change placement direction
+            # get relative index in each block, ex numRows 4, then block has 6 slots
+            relativeIndex = i % templateBlockSize # ex relativeIndex in (0,5)
+            if relativeIndex % numRows == 0: #(1,4)
+                alterDirection = True
+                    
+            # update direction for next placement
+            if alterDirection:
+                if direction == "down":      
+                    direction = "top right"
+                else:
+                    direction = "down"
+                    # entering new block, set Y 2 less so next iterration will move down 1
+                    currentX+=1
+                    currentY-=2
+            #print("Should go", direction, "next")
+            
+            # update X,Y
+            if direction == "down":
+                currentY+=1
+            else:
+                currentY-=1
+                currentX+=1
+                
+            alterDirection = False
+            
+            
+        mark, strIndex= "˙", 0
+        
+        for x in range(matrixW):
+            for y in range(matrixH):    
+                if Matrix[y][x] == mark:
+                    Matrix[y][x] = s[strIndex]
+                    strIndex+=1
+                    
+        # display placed matrix
+        [print(Matrix[x]) for x in range(len(Matrix))]
+        
+        # form the string
+        zigZagString = ""
+        for y in range(matrixH):
+            for x in range(matrixW):
+                if not Matrix[y][x] == " ":
+                    zigZagString+=Matrix[y][x]
+        
+        return zigZagString
+
+def main():
+    testStr=""
+    numRows=0
+    if len(sys.argv) > 2:
+        testStr = sys.argv[1]
+        numRows = int(sys.argv[2])
+        print("Zig Zag String of ",testStr,":",Solution().convert(testStr,numRows))
+    else:
+        print("Command line usage:\n                    python Solution TheStringYouWantZigZagWithoutSpace RowNumber")
+  
+    
+if __name__ == "__main__":
+    main()
