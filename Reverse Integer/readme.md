@@ -15,7 +15,7 @@ Assume we are dealing with an environment which could only hold integers within 
 
 ----------------------------
 
-View ![Test](https://leetcode.com/submissions/detail/128073480/) submissions on Leetcode
+View [Test](https://leetcode.com/submissions/detail/128073480/) submissions on Leetcode
 
 
 ![pic](https://github.com/viane/daily-pset/blob/master/Reverse%20Integer/Screen%20Shot%202017-11-13%20at%2011.22.34%20AM.png?raw=true)
