@@ -13,4 +13,8 @@
 >Note:
 >
 >Although the above answer is in lexicographical order, your answer could be in any order you want.
- 
+>
+
+####Test Benchmark
+
+![](https://github.com/viane/daily-pset/blob/master/Letter%20Combinations%20of%20a%20Phone%20Number/test_reult.png?raw=true)
