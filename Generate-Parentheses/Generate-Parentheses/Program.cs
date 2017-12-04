@@ -6,7 +6,13 @@ namespace GenerateParentheses
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            int numberOfP = 8;  // dont go over this number...
+            Solution s = new Solution();
+
+            foreach (string prime in s.GenerateParenthesis(numberOfP))
+            {
+                Console.WriteLine(prime);
+            }
         }
     }
 }
