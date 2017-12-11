@@ -1,0 +1,74 @@
+4
+
+
+
+WWWWWWWWWW
+W   FF   W
+W F FF F W
+W F FF F W
+W F FF F W
+W F FF F W
+W F FF F W
+W F FF F W
+W F    F W
+W F    F W
+W      F W
+W  F   F W
+W  F   F W
+W      F W
+WWWWWWWWWW
+
+
+
+WWWWWWWWWW
+W   FF   W
+W F FF FFW
+W F FF FFW
+W F FF FFW
+W F FF FFW
+W F FF FFW
+W F FF FFW
+W F    FFW
+W F    FFW
+W      FFW
+WF F   FFW
+WF F   FFW
+W      FFW
+WWWWWWWWWW
+
+
+
+WWWWWWWWWW
+WFFFFF F W
+WF  FF F W
+WF  FF F W
+WFFF F F W
+WFFF F F W
+WFFF F F W
+W    F   W
+W    F F W
+WFFF   F W
+WFFFF  F W
+WF FF  F W
+WF FFF F W
+WFFFFF F W
+WWWWWWWWWW
+
+
+
+WWWWWWWWWW
+W  F     W
+W  FFFF  W
+W     FF W
+W     F  W
+W FFF F  W
+W F   F  W
+W F FFF  W
+W F  FF  W
+W F      W
+WFF FFF  W
+WFF  FF  W
+W FF FF  W
+W    F   W
+WWWWWWWWWW
+
