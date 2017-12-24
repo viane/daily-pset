@@ -1,11 +1,18 @@
 export class DivisionSolver {
+  protected MAX_INT:number = Math.pow(2, 53) -1;
+  protected  MIN_INT:number = - this.MAX_INT;
+
   constructor(protected dividend: number, protected divisor: number) { }
   divide = () => {
+    if (this.dividend === 0) {
+      return 0
+    }
+    if (this.divisor === 0) {
+      return 'Can\'t not divide by 0'
+    }
+
     let temp_dividend = this.dividend
     let temp_divisor = this.divisor
-    if (this.dividend == 0 || (this.dividend < this.divisor)) {
-      return 0;
-    }
 
     let answer = {
       dividends: [this.dividend],
@@ -20,11 +27,10 @@ export class DivisionSolver {
 
     // positive case
     if ((this.dividend > 0 && this.divisor > 0) || (this.dividend < 0 && this.divisor < 0)) {
-      return answer
+      return answer.q
     } else {
       answer.q = answer.q * -1
-      return answer
+      return answer.q
     }
-
   }
 }

@@ -1,6 +1,8 @@
-# Typescript practice
+# Divide Two Integers
 
-Main focus on OOP and strong typed javascript implementation.
+Divide two integers without using multiplication, division and mod operator.
+
+If it is overflow, return MAX_INT.
 
 ```sh
 # Auto compile .ts to .js and start watching

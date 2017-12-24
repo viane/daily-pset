@@ -5,12 +5,17 @@ var DivisionSolver = /** @class */ (function () {
         var _this = this;
         this.dividend = dividend;
         this.divisor = divisor;
+        this.MAX_INT = Math.pow(2, 53) - 1;
+        this.MIN_INT = -this.MAX_INT;
         this.divide = function () {
-            var temp_dividend = _this.dividend;
-            var temp_divisor = _this.divisor;
-            if (_this.dividend == 0 || (_this.dividend < _this.divisor)) {
+            if (_this.dividend === 0) {
                 return 0;
             }
+            if (_this.divisor === 0) {
+                return 'Can\'t not divide by 0';
+            }
+            var temp_dividend = _this.dividend;
+            var temp_divisor = _this.divisor;
             var answer = {
                 dividends: [_this.dividend],
                 divisor: _this.divisor,
@@ -22,11 +27,11 @@ var DivisionSolver = /** @class */ (function () {
             }
             // positive case
             if ((_this.dividend > 0 && _this.divisor > 0) || (_this.dividend < 0 && _this.divisor < 0)) {
-                return answer;
+                return answer.q;
             }
             else {
                 answer.q = answer.q * -1;
-                return answer;
+                return answer.q;
             }
         };
     }

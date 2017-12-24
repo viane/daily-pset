@@ -1,13 +1,13 @@
 import {DivisionSolver} from './solution'
 
-let falseByNegative:DivisionSolver = new DivisionSolver(-3,3)
+let test1:DivisionSolver = new DivisionSolver(-21474, 3)
 
-let result = falseByNegative.divide()
+let result = test1.divide()
 
 console.log(result)
 
-let okayByPositive:DivisionSolver = new DivisionSolver(3,3)
+let test2:DivisionSolver = new DivisionSolver(21474,2)
 
-result = okayByPositive.divide()
+result = test2.divide()
 
 console.log(result)
