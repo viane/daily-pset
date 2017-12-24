@@ -24,4 +24,4 @@ node /built/js/main.js
 
 # Test Result
 
-![](/resource/test.png)
+![](./resource/test.png)
