@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "gulp-browserify": "^0.5.1",
+    "gulp-concat": "^2.6.1",
     "gulp-sequence": "^0.4.6"
   },
   "scripts": {

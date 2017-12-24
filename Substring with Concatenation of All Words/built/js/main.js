@@ -69,8 +69,14 @@ exports.__esModule = true;
 var checker_1 = require("./checker");
 var test1 = new checker_1.Checker();
 console.log(JSON.stringify(test1.findSubstring('barfootadasdhefoobarmanbarfoo', ["foo", "bar"]), null, '\t'));
+// leetCode test case API
+var findSubstring = function (s, words) {
+    var finder = new checker_1.Checker();
+    return finder.findSubstring(s, words);
+};
+console.log(findSubstring('barfootadasdhefoobarmanbarfoo', ["foo", "bar"]));
 
-}).call(this,require("rH1JPG"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_f154e99a.js","/")
+}).call(this,require("rH1JPG"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_43bfb9ac.js","/")
 },{"./checker":1,"buffer":5,"rH1JPG":7}],3:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 "use strict";
