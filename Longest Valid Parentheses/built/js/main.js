@@ -1,22 +1,107 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+exports.__esModule = true;
+var Checker = /** @class */ (function (_super) {
+    __extends(Checker, _super);
+    function Checker() {
+        var _this = _super.call(this) || this;
+        _this.compareParentheses = function (s) {
+            var sample_string = s;
+            var left_parenthes_count = 0;
+            var right_parenthes_count = 0;
+            for (var _i = 0, sample_string_1 = sample_string; _i < sample_string_1.length; _i++) {
+                var char = sample_string_1[_i];
+                if (char === '(') {
+                    left_parenthes_count++;
+                }
+                else {
+                    right_parenthes_count++;
+                }
+            }
+            if (left_parenthes_count == right_parenthes_count) {
+                return 0;
+            }
+            else if (left_parenthes_count > right_parenthes_count) {
+                return 1;
+            }
+            else {
+                return -1;
+            }
+        };
+        _this.LVP = function (s) {
+            if (s.length === 0) {
+                return 0;
+            }
+            var result = {
+                lvp: [],
+                lvp_length: 0,
+                longest_lvp: "",
+                longest_lvp_length: 0
+            };
+            var lvp_string = "";
+            var lvp_checking_index = 0;
+            // forward direction scan
+            for (lvp_checking_index; lvp_checking_index < s.length; lvp_checking_index++) {
+                var copy_of_lvp = lvp_string;
+                copy_of_lvp += s[lvp_checking_index]; // add current char and predict if valid
+                if (_this.compareParentheses(copy_of_lvp) === -1) {
+                    if (_this.compareParentheses(lvp_string) === 0 && lvp_string.length != 0) {
+                        result.lvp.unshift(lvp_string);
+                        lvp_string = "";
+                    }
+                }
+                else {
+                    lvp_string = copy_of_lvp;
+                }
+                // after last char of string
+                if (lvp_checking_index === s.length - 1 && _this.compareParentheses(lvp_string) === 0 && lvp_string.length != 0) {
+                    result.lvp.unshift(lvp_string);
+                }
+            }
+            // backward direction scan
+            // format result
+            if (result.lvp.length > 0) {
+                result.lvp.sort(function (a, b) { return b.length - a.length; });
+                result.longest_lvp = result.lvp[0];
+                result.longest_lvp_length = result.lvp[0].length;
+            }
+            result.lvp_length = result.lvp.length;
+            return result;
+        };
+        return _this;
+    }
+    return Checker;
+}(Object));
+exports.Checker = Checker;
+
+}).call(this,require("rH1JPG"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/checker.js","/")
+},{"buffer":4,"rH1JPG":7}],2:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+"use strict";
 exports.__esModule = true;
 var now = require("performance-now");
+var checker_1 = require("./checker");
 var startTime = now();
 // Implement your function here
-var sleep = function (miliseconds) {
-    var currentTime = new Date().getTime();
-    while (currentTime + miliseconds >= new Date().getTime()) {
-    }
-};
-sleep(827);
+var s = Object.create(new checker_1.Checker());
+console.log(JSON.stringify(s.LVP("(()"), null, '\t'));
 // End of implementation
 var endTime = now();
-console.log("Task took " + (endTime - startTime).toFixed(1) + " milliseconds to finish.");
+console.log("\nTask took " + (endTime - startTime).toFixed(1) + " milliseconds to finish.\n");
 
-}).call(this,require("rH1JPG"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_424e4fea.js","/")
-},{"buffer":3,"performance-now":5,"rH1JPG":6}],2:[function(require,module,exports){
+}).call(this,require("rH1JPG"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_eaa33e57.js","/")
+},{"./checker":1,"buffer":4,"performance-now":6,"rH1JPG":7}],3:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 
@@ -144,7 +229,7 @@ var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 }(typeof exports === 'undefined' ? (this.base64js = {}) : exports))
 
 }).call(this,require("rH1JPG"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../../node_modules/base64-js/lib/b64.js","/../../node_modules/base64-js/lib")
-},{"buffer":3,"rH1JPG":6}],3:[function(require,module,exports){
+},{"buffer":4,"rH1JPG":7}],4:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 /*!
  * The buffer module from node.js, for the browser.
@@ -1257,7 +1342,7 @@ function assert (test, message) {
 }
 
 }).call(this,require("rH1JPG"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../../node_modules/buffer/index.js","/../../node_modules/buffer")
-},{"base64-js":2,"buffer":3,"ieee754":4,"rH1JPG":6}],4:[function(require,module,exports){
+},{"base64-js":3,"buffer":4,"ieee754":5,"rH1JPG":7}],5:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
@@ -1345,7 +1430,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
 }
 
 }).call(this,require("rH1JPG"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../../node_modules/ieee754/index.js","/../../node_modules/ieee754")
-},{"buffer":3,"rH1JPG":6}],5:[function(require,module,exports){
+},{"buffer":4,"rH1JPG":7}],6:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 // Generated by CoffeeScript 1.12.2
 (function() {
@@ -1385,7 +1470,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
 //# sourceMappingURL=performance-now.js.map
 
 }).call(this,require("rH1JPG"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../../node_modules/performance-now/lib/performance-now.js","/../../node_modules/performance-now/lib")
-},{"buffer":3,"rH1JPG":6}],6:[function(require,module,exports){
+},{"buffer":4,"rH1JPG":7}],7:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 // shim for using process in browser
 
@@ -1452,4 +1537,4 @@ process.chdir = function (dir) {
 };
 
 }).call(this,require("rH1JPG"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../../node_modules/process/browser.js","/../../node_modules/process")
-},{"buffer":3,"rH1JPG":6}]},{},[1])
+},{"buffer":4,"rH1JPG":7}]},{},[2])

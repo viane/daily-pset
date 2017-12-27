@@ -1,15 +1,13 @@
 import now = require("performance-now")
+import {Checker} from './checker'
 
 var startTime = now()
 
 // Implement your function here
-const sleep = (miliseconds)=> {
-   var currentTime = new Date().getTime();
 
-   while (currentTime + miliseconds >= new Date().getTime()) {
-   }
-}
-sleep(827);
+let s:Checker = Object.create(new Checker())
+console.log(JSON.stringify(s.LVP("(()"),null,'\t'))
+
 // End of implementation
 
 var endTime = now()
