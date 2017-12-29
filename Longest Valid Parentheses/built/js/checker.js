@@ -68,6 +68,27 @@ var Checker = /** @class */ (function (_super) {
                 }
             }
             // backward direction scan
+            lvp_string = '';
+            for (lvp_checking_index = s.length - 1; lvp_checking_index >= 0; lvp_checking_index--) {
+                var copy_of_lvp = lvp_string;
+                copy_of_lvp = s[lvp_checking_index].concat(copy_of_lvp); // add current char and predict if valid
+                if (_this.compareParentheses(copy_of_lvp) === 1) {
+                    if (_this.compareParentheses(lvp_string) === 0 && lvp_string.length != 0) {
+                        result.lvp.unshift(lvp_string);
+                        lvp_string = "";
+                    }
+                }
+                else {
+                    lvp_string = copy_of_lvp;
+                    if (_this.compareParentheses(lvp_string) === 0 && lvp_string.length != 0) {
+                        result.lvp.unshift(lvp_string);
+                    }
+                }
+                // after last char of string
+                if (lvp_checking_index === 0 && _this.compareParentheses(lvp_string) === 0 && lvp_string.length != 0) {
+                    result.lvp.unshift(lvp_string);
+                }
+            }
             // format result
             if (result.lvp.length > 0) {
                 result.lvp.sort(function (a, b) { return b.length - a.length; });

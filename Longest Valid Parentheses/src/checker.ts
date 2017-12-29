@@ -45,23 +45,43 @@ export class Checker extends Object {
 
       copy_of_lvp += s[lvp_checking_index] // add current char and predict if valid
 
-      if (this.compareParentheses(copy_of_lvp) === -1) { // if not valid
-        if (this.compareParentheses(lvp_string) === 0 && lvp_string.length != 0) { // if # of ( sequal # of ) before adding
+      if (this.compareParentheses(copy_of_lvp) === -1) { // if # of '(' < # of ')'
+        if (this.compareParentheses(lvp_string) === 0 && lvp_string.length != 0) { // if # of ( equals # of ) before adding
           result.lvp.unshift(lvp_string)
           lvp_string = ""
         }
       } else {
         lvp_string = copy_of_lvp
       }
-
       // after last char of string
       if (lvp_checking_index === s.length - 1 && this.compareParentheses(lvp_string) === 0 && lvp_string.length != 0) { // if # of ( sequal # of ) before adding
         result.lvp.unshift(lvp_string)
       }
     }
-
     // backward direction scan
+    lvp_string = ''
+    for (lvp_checking_index= s.length-1; lvp_checking_index >= 0 ; lvp_checking_index--) {
+      let copy_of_lvp = lvp_string
+      copy_of_lvp = s[lvp_checking_index].concat(copy_of_lvp)  // add current char and predict if valid
 
+
+      if (this.compareParentheses(copy_of_lvp) === 1) { // if # of '(' < # of ')'
+        if (this.compareParentheses(lvp_string) === 0 && lvp_string.length != 0) { // if # of ( equal # of ) before adding
+          result.lvp.unshift(lvp_string)
+          lvp_string = ""
+        }
+      } else {
+        lvp_string = copy_of_lvp
+        if (this.compareParentheses(lvp_string) === 0 && lvp_string.length != 0) {
+          result.lvp.unshift(lvp_string)
+        }
+      }
+
+      // after last char of string
+      if (lvp_checking_index === 0 && this.compareParentheses(lvp_string) === 0 && lvp_string.length != 0) { // if # of ( sequal # of ) before adding
+        result.lvp.unshift(lvp_string)
+      }
+    }
 
     // format result
     if(result.lvp.length>0){

@@ -1,6 +1,10 @@
-# Typescript practice
+# Longest Valid Parentheses
 
-Main focus on OOP and strong typed javascript implementation.
+Given a string containing just the characters '```(```' and '```)```', find the length of the longest valid (well-formed) parentheses substring.
+
+For "```(()```", the longest valid parentheses substring is "```()```", which has length = **2**.
+
+Another example is "```)()())```", where the longest valid parentheses substring is "```()()```", which has length = **4**.
 
 ```sh
 # Auto compile .ts to .js and start watching
@@ -11,7 +15,7 @@ gulp watch
 
 node /built/js/main.js
 
-# Compress to one file
+# Test cases
 
-gulp compress # Will generate /built/js/allInOne.js
+npm test
 ```
