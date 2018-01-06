@@ -2,9 +2,8 @@
 
 Write a code to do following:
 
-| | |
-|---|---|
 |n | String to print|
+|---|---|
 |0 | 1|
 |1 | 1 1|
 |2 | 2 1|
