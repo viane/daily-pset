@@ -1,0 +1,47 @@
+{
+  "name": "integer-division",
+  "version": "1.0.0",
+  "description": "Basic template but should cover most of the building options.",
+  "engines": {
+    "node": ">=6.11"
+  },
+  "main": "./built/main",
+  "dependencies": {
+    "typescript": "^2.6.2"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-typescript": "^3.2.3",
+    "merge2": "^1.2.0",
+    "@types/chai": "^4.0.10",
+    "@types/mocha": "^2.2.45",
+    "chai": "^4.1.2",
+    "gulp-browserify": "^0.5.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-sequence": "^0.4.6",
+    "mocha": "^4.1.0",
+    "nodemon": "^1.14.6",
+    "performance-now": "^2.1.0",
+    "ts-node": "^4.1.0"
+  },
+  "scripts": {
+    "start": "nodemon built/**/main.js",
+    "watch": "gulp watch",
+    "complie": "gulp compress",
+    "test": "mocha -r ts-node/register src/**/test.ts",
+    "test-dev": "nodemon --exec mocha -r ts-node/register src/**/test.ts || true"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/viane/typescript-starter.git"
+  },
+  "author": "Xiaoyu Zhou <xiaoyuz2011@gmail.com> (http://allenzdev.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/viane/typescript-starter/issues"
+  },
+  "homepage": "https://github.com/viane/typescript-starter#readme",
+  "directories": {
+    "test": "test"
+  }
+}
