@@ -3,10 +3,12 @@ import now = require("performance-now")
 import { Finder } from './finder'
 
 // Implement your function here
+const defaultTestSet = {run:null, ["missing-integer"]: 0 }
 
 const main = (): void => {
   let startTime: number = now(), endTime: number
 
+  // random array
   let foo = [];
 
   for (var i = 1; i <= 10000; i++) {
@@ -14,9 +16,12 @@ const main = (): void => {
   }
 
   const missingIndex = Math.floor(Math.random() * 10000)
+  // set missing integer
   const missingInteger = foo[missingIndex]
+  defaultTestSet["missing-integer"] = missingInteger
   foo[missingIndex] = -1
 
+  // find...
   const f: Finder = Object.create(new Finder())
 
   const findResult: number = f.firstMissingPositive(foo)
@@ -30,10 +35,11 @@ const main = (): void => {
 
 main()
 
+defaultTestSet.run = main
 
 // Export function set
 export default {
-  defaultTest: { run: main }
+  defaultTestSet
 }
 
 // End of implementation
