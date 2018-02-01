@@ -294,3 +294,7 @@ FakesAssemblies/
 *.csproj
 
 *.sln
+
+**/.classpath
+
+**/.project
