@@ -7,7 +7,7 @@ public class Solver {
 		checkInputs(s1,s2);
 		
 		int col_len = s1.length() + s2.length();
-		int row_len = (s1.length() * s2.length()) < 2 ? 2 : s1.length() * s2.length();
+		int row_len = s1.length() * s2.length();
 		
 		// 
 		
@@ -18,36 +18,39 @@ public class Solver {
 	
 	private String sum(String s1, String s2, int row_len, int col_len) {
 		int row_index= 0;
-		boolean carry_out = false;
+		int carry_out = 0;
 		
 		// place proper multiplyed digit into matrix
 		for(int s2_digit = s2.length()-1; s2_digit>=0;s2_digit--) {
 			for(int s1_digit = s1.length()-1; s1_digit>=0;s1_digit--,row_index++) {
 				int single_digit_multiply = (s1.charAt(s1_digit) - '0') * (s2.charAt(s2_digit) - '0');
-				if(carry_out) {
-					single_digit_multiply += 1;
-				}
-				carry_out = single_digit_multiply >= 10 ?  true : false;
+
+				single_digit_multiply += carry_out;
+	
+				carry_out = single_digit_multiply >= 10 ?  single_digit_multiply/10 : 0;
 				single_digit_multiply = single_digit_multiply % 10;
 				
 				multiply_matrix[row_index][s2_digit+s1_digit+1] = (char) ('0'+ single_digit_multiply);
 						
-				System.out.printf("%d , %d => %s \n",row_index,s2_digit+s1_digit+1, single_digit_multiply);
-				
-				System.out.println(multiply_matrix[row_index][s2_digit+s1_digit+1]);
+//				System.out.printf("%d , %d => %s \n",row_index,s2_digit+s1_digit+1, single_digit_multiply);
+//				
+//				System.out.println(multiply_matrix[row_index][s2_digit+s1_digit+1]);
 			}
 		}
 		
+		// for ending carry out
+		multiply_matrix[--row_index][0] =  carry_out > 0 ? (char)('0' +carry_out) : '0';
+		
 		StringBuilder sb = new StringBuilder();
-		carry_out = false;
+		carry_out = 0;
 		for(int digit_col_index= col_len-1;digit_col_index>=0;digit_col_index--) {
 			int digit_sum_per_col = 0;
 			for(int digit_row_index = row_len-1;digit_row_index>=0;digit_row_index--) {
 				digit_sum_per_col += multiply_matrix[digit_row_index][digit_col_index] - '0';
 			}
-			digit_sum_per_col += carry_out ? 1 : 0;
+			digit_sum_per_col += carry_out;
 			
-			carry_out = digit_sum_per_col >= 10 ? true : false;
+			carry_out = digit_sum_per_col >= 10 ? digit_sum_per_col/10 : 0;
 			
 			digit_sum_per_col = digit_sum_per_col % 10;
 			
@@ -55,7 +58,7 @@ public class Solver {
 			
 		}
 		
-		displayMatrix();
+//		displayMatrix();
 		
 		if(sb.charAt(0) == '0') {
 			return sb.substring(1).toString();
