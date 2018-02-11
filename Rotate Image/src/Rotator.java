@@ -1,14 +1,33 @@
+import java.util.Scanner;
 
 public class Rotator {
-    public int[][] rotate(int[][] matrix) {
+    @SuppressWarnings("finally")
+	public int[][] rotate(int[][] matrix) {
     		System.out.println("Input image:");
     		displayImage(matrix);
     		
-    		int[][] afterRotate = rotateMatrix(matrix);
-    		System.out.println("\nAfter Rotation:");
-    		displayImage(afterRotate);
+    		int option = 0;  // 0 for right rotation, 1 for left rotation
     		
-    		return afterRotate;
+    		try {
+    			System.out.println("Input rotation direction (0 for right rotation, 1 for left rotation) ");
+    			Scanner sc = new Scanner(System.in);
+    			do {
+    			    while (!sc.hasNextInt()) {System.out.println("Input rotation direction (0 for right rotation, 1 for left rotation) "); sc.next();}
+    			    
+    			    option = sc.nextInt();
+    			} while (option < 0 || option > 1);
+    			sc.close();
+    		}catch(Exception e) {
+    			throw e;
+    		}finally {
+
+        		int[][] afterRotate = rotateMatrix(matrix, option);
+        		System.out.println("\nAfter Rotation:");
+        		displayImage(afterRotate);
+        		
+        		return afterRotate;
+    		}
+  
     }
     
     protected void displayImage(int[][] matrix) { 	
@@ -22,7 +41,8 @@ public class Rotator {
     		
     }
     
-    private int[][] rotateMatrix(int[][] matrix){
+    private int[][] rotateMatrix(int[][] matrix, int option){
+    		// swap row[0] with row[last]...
     		for(int row = 0; row < (matrix.length-1)/2;row++) {
     			for(int col = 0; col < matrix[row].length; col++) {    				    				
     				int temp = matrix[row][col];
