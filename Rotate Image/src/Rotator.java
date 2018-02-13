@@ -1,32 +1,20 @@
-import java.util.Scanner;
-
 public class Rotator {
-    @SuppressWarnings("finally")
-	public int[][] rotate(int[][] matrix) {
+	public int[][] rotate(int[][] matrix, int option) throws Exception {
     		System.out.println("Input image:");
     		displayImage(matrix);
     		
-    		int option = 0;  // 0 for right rotation, 1 for left rotation
-    		
-    		try {
-    			System.out.println("Input rotation direction (0 for right rotation, 1 for left rotation) ");
-    			Scanner sc = new Scanner(System.in);
-    			do {
-    			    while (!sc.hasNextInt()) {System.out.println("Input rotation direction (0 for right rotation, 1 for left rotation) "); sc.next();}
-    			    
-    			    option = sc.nextInt();
-    			} while (option < 0 || option > 1);
-    			sc.close();
-    		}catch(Exception e) {
-    			throw e;
-    		}finally {
+		if(option<0 || option >1) {
+			// 0 for right rotation, 1 for left rotation
+			throw new Exception("Invaild rotation option, only 0 and 1 can be passed");
+		}
 
         		int[][] afterRotate = rotateMatrix(matrix, option);
-        		System.out.println("\nAfter Rotation:");
+        		String direction = option == 0 ? "Right" : "Left";
+        		System.out.printf("After %s Rotation:\n", direction);
         		displayImage(afterRotate);
         		
         		return afterRotate;
-    		}
+    		
   
     }
     
@@ -38,11 +26,12 @@ public class Rotator {
     			}
     			System.out.println("|");
     		}
-    		
+    		System.out.println("");
     }
     
     private int[][] rotateMatrix(int[][] matrix, int option){
-    		// swap row[0] with row[last]...
+    	if(option == 0) {
+    		// swap top/bot symmetrically
     		for(int row = 0; row < (matrix.length-1)/2;row++) {
     			for(int col = 0; col < matrix[row].length; col++) {    				    				
     				int temp = matrix[row][col];
@@ -50,10 +39,22 @@ public class Rotator {
         			matrix[matrix.length-1-row][col] = temp;
     			}
     		}
+    	}
     		
-    	
+    		if(option == 1) {
+    			// swap left/right symmetrically
+    			for(int row =0; row < matrix.length;row++) {
+    				for(int col =0; col < (matrix[row].length-1)/2;col++) {
+    					int temp = matrix[row][col];
+    					matrix[row][col] = matrix[row][matrix[row].length-1-col];
+    					matrix[row][matrix[row].length-1-col] = temp;
+    				}
+    			}
+    		}
+    		
+    		// swap bottom left of matrix with top right of the matrix (around the diagonal)
     		for(int row = 0; row < matrix.length;row++) {
-    			for(int col = row+1; col < matrix[row].length;col++) {    				if(row == col) continue;
+    			for(int col = row+1; col < matrix[row].length;col++) {
     				int temp = matrix[row][col];
     				matrix[row][col] = matrix[col][row];
     				matrix[col][row] = temp;
