@@ -1,17 +1,15 @@
 package com;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
-import com.GA;
+import org.junit.Test;
 
+public class DefaultTest {
 
-class Test {
-
-	@org.junit.jupiter.api.Test
-	void test() {
+	@Test
+	public void test() {
 		ArrayList<String> sample = new ArrayList<>();
 		sample.add("ab");
 		sample.add("c");

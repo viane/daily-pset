@@ -28,7 +28,14 @@ public class GA {
 				int found_set_index = -1;
 				for(int i =0; i< return_val.size();i++) {
 					// fix: use token_val
-					if(return_val.get(i).contains(token)) 
+					Iterator<String> it = return_val.get(i).iterator();
+					// calculate ASCII value for the 1st element in set
+					String str = it.toString();
+					int str_val = 0;
+					for(char c : str.toCharArray()) {
+						str_val += c-'0';
+					}
+					if(str_val == token_val) 
 						found_set_index = i;
 				}
 				
