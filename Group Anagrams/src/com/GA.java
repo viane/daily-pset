@@ -1,57 +1,53 @@
 package com;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 public class GA {
-	ArrayList<String> sample= new ArrayList<>();;
-	public GA(ArrayList<String> input) {
-		for(String token : input) {
-			sample.add(token);
-		}
-	}
-	
-
-	public ArrayList<Set<String>> classify() {
+	protected List<List<String>> groupAnagrams(String[] strs) {
 		// TODO Auto-generated method stub
-		ArrayList<Set<String>> return_val = new ArrayList<>();
 
-		for(String token : sample) {
+		// map of <ASCII sum, {subStrs..}>
+		HashMap<Integer, List<String>> groupHash = new HashMap<>();
+		
+		
+		// for each word, check ASCII sum, if sum exists, append to corresponded set, 
+		// if sum is new, add new <ASCII sum, word> pair to groupHash
+		for(String token : strs) {
+
 			// calculate ASCII value sum of the token
-				int token_val = 0;
-				for(char c : token.toCharArray()) {
-					token_val += c - '0';
-				}
-			// compare to all sets in the return_val
-				int found_set_index = -1;
-				for(int i =0; i< return_val.size();i++) {
-					// fix: use token_val
-					Iterator<String> it = return_val.get(i).iterator();
-					// calculate ASCII value for the 1st element in set
-					String str = it.toString();
-					int str_val = 0;
-					for(char c : str.toCharArray()) {
-						str_val += c-'0';
-					}
-					if(str_val == token_val) 
-						found_set_index = i;
-				}
-				
-			// if no set has same ASCII value as the token
-				if(found_set_index== -1) {
-					// create the set with this token and add to return_val
-					Set<String> s = new HashSet<>();
-					s.add(token);
-					return_val.add(s);
-				}
-			// else, add token into the set
-				else {
-					return_val.get(found_set_index).add(token);
-				}
+			int word_ascii_val = 0;
+			for(char c : token.toCharArray()) {
+				word_ascii_val += c - '0';
+			}
+			
+			if(groupHash.containsKey(word_ascii_val)) {
+				groupHash.get(word_ascii_val).add(token);
+			}else {
+				List<String> s = new ArrayList<String>();
+				s.add(token);
+				groupHash.put(word_ascii_val, s);
+			}
+			
 		}
-		return return_val;
+		
+		List<List<String>> returnList = new ArrayList<List<String>>();
+		
+		// reformat
+		groupHash.forEach((key,val)->{
+			List<String> temp = new ArrayList<>();
+			for(String token : val) {
+				temp.add(token);
+			}
+			returnList.add(temp);
+		});
+		
+
+		// Done
+		return returnList;
 	}
 
 }
